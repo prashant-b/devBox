@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
   SHELL
   
   config.vm.provision "docker" do |d|
-    #d.build_image "/vagrant/app"
+    d.build_image "/home/vagrant/devBox/nginx", args: "-t devbox_nginx"
   end
   
   # Create a forwarded port mapping which allows access to a specific port
