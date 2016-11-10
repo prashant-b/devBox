@@ -9,6 +9,7 @@ FROM ubuntu
 
 # Install Nginx.
 RUN \
+  sudo apt-get install software-properties-common && \
   add-apt-repository -y ppa:nginx/stable && \
   apt-get update && \
   apt-get install -y nginx && \
