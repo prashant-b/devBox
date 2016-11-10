@@ -14,7 +14,8 @@ Vagrant.configure(2) do |config|
   config.vm.box = "williamyeh/ubuntu-trusty64-docker"
   
   config.vm.provision "shell", inline: <<-SHELL
-     cd /home/vagrant
+     rm -rf /home/vagrant/devBox
+	 cd /home/vagrant
 	 git clone https://github.com/prashant-b/devBox.git
   SHELL
   
