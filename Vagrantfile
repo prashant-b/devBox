@@ -12,7 +12,16 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   
   config.vm.box = "williamyeh/ubuntu-trusty64-docker"
-
+  
+  config.vm.provision "shell", inline: <<-SHELL
+     cd /home/vagrant
+	 git clone https://github.com/prashant-b/devBox.git
+  SHELL
+  
+  config.vm.provision "docker" do |d|
+    #d.build_image "/vagrant/app"
+  end
+  
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
@@ -45,7 +54,6 @@ Vagrant.configure(2) do |config|
   #   vb.memory = "1024"
   # end
   #
- 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
@@ -53,4 +61,5 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
+  
 end
