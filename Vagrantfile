@@ -12,16 +12,22 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   
   config.vm.box = "williamyeh/ubuntu-trusty64-docker"
-  config.vm.synced_folder "../knowledgecenter", "/tmp/knowledgecenter"
+  
+  config.vm.synced_folder "../knowledgecenter", "/opt/knowledgecenter"
+  
+#  config.vm.provision :docker_compose, yml: "/docker-compose.yml", run: "always" 
+  
   config.vm.provision "shell", inline: <<-SHELL
-     rm -rf /home/vagrant/devBox
-	 cd /home/vagrant
-	 git clone https://github.com/prashant-b/devBox.git
-  SHELL
+#	 docker-compose up
+#     rm -rf /home/vagrant/devBox
+#	 cd /home/vagrant
+#	 git clone https://github.com/prashant-b/devBox.git
+ SHELL
   
   config.vm.provision "docker" do |d|
-    d.build_image "/home/vagrant/devBox/nginx", args: "-t devbox_nginx"
-	d.run "devbox_nginx
+#	d.build_image "/home/vagrant/devBox/nginx", args: "-t devbox_nginx"
+	d.run "devbox_nginx",
+	args: "-p 80:80"
   end
     
   # Create a forwarded port mapping which allows access to a specific port
@@ -31,7 +37,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.56.100"
+  config.vm.network "private_network", ip: "192.168.56.110"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on

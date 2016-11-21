@@ -20,6 +20,9 @@ RUN \
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
 
+# Copy Custom conf file
+ADD nginx.conf /etc/nginx/
+
 # Define working directory.
 WORKDIR /etc/nginx
 
